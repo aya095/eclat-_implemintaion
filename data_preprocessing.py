@@ -1,5 +1,4 @@
-import pandas as pd 
-data = pd.read_excel("Horizontal_Format.xlsx")
+
 def data_process(data):
 # print(data)
  class Item:
@@ -28,7 +27,3 @@ def data_process(data):
          items_in_all.append(new)
           
  return items_in_all 
- 
-RES=(data_process(data))
-for itm in RES:
-  print (itm.name,itm.support,itm.transactions)
