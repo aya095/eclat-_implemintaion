@@ -8,9 +8,6 @@ from Association_rules import generate_association_rules
 from rule_evaluation import evaluate_rules, summarize_results
 
 
-# ==============================
-# Helper Functions
-# ==============================
 
 def format_itemset(itemset):
     items = sorted(str(item) for item in itemset)
@@ -51,9 +48,6 @@ def display_rules(title, rules):
             f"{status:<15}"
         )
 
-# ==============================
-# 1. Read Dataset
-# ==============================
 
 data = pd.read_excel("Horizontal_Format.xlsx")
 
@@ -85,9 +79,6 @@ if data["Items"].str.strip().eq("").any():
 transactions_number = len(data)
 
 
-# ==============================
-# 2. Read Minimum Thresholds
-# ==============================
 
 min_support = float(input("Enter Minimum Support (%): "))
 min_confidence = float(input("Enter Minimum Confidence (%): "))
@@ -111,16 +102,10 @@ print("Minimum Support Count:", min_support_count)
 print("Minimum Confidence:", min_confidence, "%")
 
 
-# ==============================
-# 3. Data Preprocessing
-# ==============================
 
 items = data_process(data)
 
 
-# ==============================
-# 4. ECLAT - Frequent Itemsets
-# ==============================
 
 all_levels = eclat(items, min_support_count)
 
@@ -152,9 +137,7 @@ if frequent_itemsets_count == 0:
 print("\nTotal Frequent Itemsets:", frequent_itemsets_count)
 
 
-# ==============================
-# 5. Generate Association Rules
-# ==============================
+
 
 rules = generate_association_rules(
     all_levels,
@@ -162,9 +145,7 @@ rules = generate_association_rules(
 )
 
 
-# ==============================
-# 6. Evaluate Rules
-# ==============================
+
 
 evaluated_rules, strong_rules = evaluate_rules(
     rules,
@@ -172,23 +153,15 @@ evaluated_rules, strong_rules = evaluate_rules(
 )
 
 
-# ==============================
-# 7. Display All Association Rules
-# ==============================
+
 
 display_rules("ALL ASSOCIATION RULES", evaluated_rules)
 
 
-# ==============================
-# 8. Display Strong Association Rules
-# ==============================
-
 display_rules("STRONG ASSOCIATION RULES", strong_rules)
 
 
-# ==============================
-# 9. Summary
-# ==============================
+
 
 summary = summarize_results(
     all_levels,
@@ -208,9 +181,7 @@ print("Total Strong Rules:",
       summary["strong_rules_count"])
 
 
-# ==============================
-# 10. Minimum Support Experiments
-# ==============================
+
 
 support_values = [20, 40, 60, 80]
 
@@ -258,9 +229,7 @@ for support_percent in support_values:
     )
 
 
-# ==============================
-# 11. Minimum Confidence Experiments
-# ==============================
+
 
 confidence_values = [50, 70, 90]
 
