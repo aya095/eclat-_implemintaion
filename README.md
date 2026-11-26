@@ -1,110 +1,91 @@
-# ECLAT Algorithm for Frequent Itemset Mining and Association Rule Generation
+# ECLAT Algorithm Implementation
 
-## Project Overview
+## Overview
 
-This project implements the **ECLAT (Equivalence Class Clustering and bottom-up Lattice Traversal)** algorithm for Frequent Itemset Mining and Association Rule Generation.
+This project implements the **ECLAT (Equivalence Class Clustering and bottom-up Lattice Traversal)** algorithm for Frequent Itemset Mining and Association Rule Mining.
 
-The system processes transaction data from an Excel file, converts it from Horizontal Format to Vertical Format, identifies frequent itemsets, generates association rules, and evaluates these rules using Confidence and Lift.
+It processes transactional datasets, discovers frequent itemsets, generates association rules, and evaluates them using Support, Confidence, and Lift.
 
-The project also allows users to experiment with different Minimum Support and Minimum Confidence thresholds.
+## Features
 
-## Project Objectives
-
-- Read transaction data from Excel files.
-- Convert Horizontal Transaction Format into Vertical Format.
-- Generate frequent itemsets (L1, L2, ..., Lk) using ECLAT.
-- Generate Association Rules from frequent itemsets.
+- Read transactional data from Excel files.
+- Convert Horizontal Format into Vertical Format using TID Sets.
+- Generate frequent itemsets using ECLAT.
+- Generate association rules from frequent itemsets.
 - Calculate Support, Confidence, and Lift.
-- Identify Strong Association Rules.
-- Compare results using different Minimum Support and Minimum Confidence values.
-
-## Technologies Used
-
-- Python
-- Pandas
-- Excel (.xlsx)
+- Classify rules as Strong or Not Strong.
+- Experiment with different Minimum Support and Minimum Confidence values.
 
 ## Project Structure
 
-```text
-ECLAT_Project/
-│
-├── data_preprocessing.py
-├── eclat.py
-├── association_rules.py
-├── rule_evaluation.py
-├── main.py
-├── test_integration.py
-├── dataset.xlsx
-└── README.md
-```
+ File | Description 
+ `main.py` | Runs the complete workflow and displays results. 
+ `data_preprocessing.py` | Reads and converts transactional data into Vertical Format. 
+ `eclat.py` | Implements the ECLAT algorithm and generates frequent itemsets. 
+ `association_rules.py` | Generates association rules and calculates Support and Confidence. 
+`rule_evaluation.py` | Calculates Lift, classifies rules, and evaluates results. 
 
-## Algorithm Workflow
+## Dataset Format
 
-1. **Data Preprocessing:** Read transactions and convert them into Vertical Format, where each item is associated with its transaction IDs.
+The input Excel file must contain two columns:
 
-2. **ECLAT Algorithm:** Generate frequent itemsets by intersecting transaction ID sets and checking the minimum support threshold.
+| TID | Items |
+|---|---|
+| T1 | A, B, C |
+| T2 | A, C |
+| T3 | B, C |
 
-3. **Association Rule Generation:** Generate possible association rules from frequent itemsets and calculate their Support and Confidence.
-
-4. **Rule Evaluation:** Calculate Lift and identify Strong Rules based on the minimum confidence threshold.
-
-5. **Integration and Experiments:** Connect all project modules, display results, and compare different support and confidence thresholds.
-
-## Input Dataset Format
-
-The input Excel file should contain at least two columns:
-
-
-- `TID`: Unique transaction identifier.
-- `Items`: Comma-separated items in each transaction.
+Each row represents one transaction. Transaction IDs must be unique, and items should be comma-separated.
 
 ## Installation
 
-Install the required dependencies:
+Requirements: Python 3, Pandas, and OpenPyXL.
+
+Install dependencies:
 
 ```bash
 pip install pandas openpyxl
 ```
 
+## How to Run
 
-##OUTPUTS
+1. Clone the repository:
 
-The program displays:
-- Frequent Itemsets.
-- Association Rules.
-- Strong Rules.
-- Support, Confidence, and Lift values.
-- Summary statistics.
-- Support and Confidence experiment results.
+```bash
+git clone https://github.com/aya095/eclat-_implemintaion.git
+```
 
+2. Navigate to the project folder:
 
-## Evaluation Metrics
+```bash
+cd eclat-_implemintaion
+```
 
-**Support**
+3. Place the Excel dataset in the project directory.
 
-The proportion of transactions containing an itemset.
+4. Run the program:
 
-**Confidence**
+```bash
+python main.py
+```
 
-The probability of finding the consequent in transactions that contain the antecedent.
+5. Enter the desired Minimum Support and Minimum Confidence percentages.
 
-**Lift**
+## Evaluation
 
-Measures the association between the antecedent and consequent.
+The project evaluates association rules using:
 
-- Lift > 1: Positive association.
-- Lift = 1: No association beyond independence.
-- Lift < 1: Negative association.
+- **Support:** Measures how frequently an itemset occurs.
+- **Confidence:** Measures the reliability of an association rule.
+- **Lift:** Measures the strength of the relationship between the antecedent and consequent.
 
-## Team Members
+Rules are classified as **Strong** or **Not Strong** based on the Minimum Confidence threshold.
 
-- Member 1: Data Preprocessing
-- Member 2: ECLAT Algorithm Implementation
-- Member 3: Association Rule Generation
-- Member 4: Rule Evaluation (Lift and Strong Rules)
-- Member 5: Integration, User Input, Output, and Testing
+The program also runs experiments with different Minimum Support and Minimum Confidence values to analyze their impact on frequent itemsets and strong rules.
 
-## Conclusion
+## Technologies Used
 
-This project demonstrates the implementation of the ECLAT algorithm and its application to frequent itemset mining and association rule discovery. It also explores how different Minimum Support and Minimum Confidence thresholds affect the generated results.
+- Python
+- Pandas
+- OpenPyXL
+
